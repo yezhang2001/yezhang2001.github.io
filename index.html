@@ -6,330 +6,39 @@
   <title>Ye Zhang</title>
   <meta name="description" content="Ye Zhang's academic personal homepage" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-
-  <!--
-    Minimal Academic Personal Homepage · Single File · Zero External Dependencies
-    --------------------------------------------------------------
-    Features:
-      · 🌙/☀ Dark mode toggle in the top-right corner (remembers choice, follows system on first visit)
-    Customization (search and replace placeholders):
-      · Ye Zhang               -> Your name
-      · [Your University]      -> Institution
-      · you@example.com        -> Email
-      · Avatar: replace <div class="avatar">YN</div> with
-              <img class="avatar" src="photo.jpg" alt="Ye Zhang" />
-  -->
-
   <style>
-    /* ===== Theme Variables (Light) ===== */
-    :root {
-      --text:      #1a1a1a;
-      --muted:     #666;
-      --line:      #e3e3e3;
-      --link:      #0b5fa5;
-      --link-hi:   #03396c;
-      --bg:        #ffffff;
-      --bg-soft:   #f7f7f7;
-      --bg-avatar: #f0f0f0;
-      --maxw:      min(800px, 90vw);
-      --serif:     Georgia, "Times New Roman", "Songti SC", serif;
-      --sans:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                   "PingFang SC", "Microsoft YaHei", sans-serif;
-    }
-    /* ===== Theme Variables (Dark) ===== */
-    :root[data-theme="dark"] {
-      --text:      #e8e8e8;
-      --muted:     #9a9a9a;
-      --line:      #2c2c2c;
-      --link:      #6cb6e8;
-      --link-hi:   #9fd0f0;
-      --bg:        #121212;
-      --bg-soft:   #1e1e1e;
-      --bg-avatar: #2a2a2a;
-    }
-
-    /* Follow system preference on first visit when no stored choice */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme]) {
-        --text:#e8e8e8; --muted:#9a9a9a; --line:#2c2c2c;
-        --link:#6cb6e8; --link-hi:#9fd0f0;
-        --bg:#121212; --bg-soft:#1e1e1e; --bg-avatar:#2a2a2a;
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-      min-height: 100%;
-    }
-
-    body {
-      font-family: var(--sans);
-      font-size: 1rem;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.65;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-      transition: background .2s ease, color .2s ease;
-    }
-
-    .page {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0 clamp(16px, 4vw, 24px) 0;
-    }
-
-    a {
-      color: var(--link);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color .15s, color .15s;
-    }
-    a[href^="http"] {
-      border-bottom-color: var(--link);
-    }
-    a:hover { color: var(--link-hi); }
-    a[href^="http"]:hover { border-bottom-color: var(--link-hi); }
-
-    /* ===== Header ===== */
-    header.hero { padding: clamp(16px, 3vw, 24px) 0; }
-
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .ctrl {
-      font-family: var(--sans);
-      font-size: 1.05rem;
-      color: var(--muted);
-      background: none;
-      border: none;
-      padding: 4px 6px;
-      cursor: pointer;
-      line-height: 1;
-      transition: color .15s;
-    }
-    .ctrl:hover { color: var(--text); }
-
-    .avatar {
-      width: clamp(64px, 12vw, 88px);
-      height: clamp(64px, 12vw, 88px);
-      border-radius: 50%;
-      background: var(--bg-avatar);
-      color: var(--muted);
-      font-family: var(--serif);
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      display: grid;
-      place-items: center;
-      object-fit: cover;
-    }
-
-    h1.name {
-      font-family: var(--serif);
-      font-weight: 700;
-      font-size: clamp(1.5rem, 4vw, 2.1rem);
-      letter-spacing: .01em;
-      margin: 0 0 4px;
-    }
-
-
-    .social {
-      margin-top: 8px;
-      font-size: .92rem;
-      color: var(--muted);
-    }
-    .social a { color: var(--text); margin-right: 14px; border-bottom-color: transparent; }
-
-	    /* ===== Page Sections: all shown ===== */
-	    main > section { margin-top: 40px; }
-
-	    h2.section-title {
-	      font-family: var(--sans);
-	      font-size: 1rem;
-	      font-weight: 700;
-	      letter-spacing: .08em;
-	      color: var(--text);
-	      margin: 0 0 18px;
-	    }
-
-    p { margin: 0 0 1rem; }
-
-    /* ===== Research Interests ===== */
-    .interests { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; }
-    .interests span.ichip {
-      font-size: .9rem;
-      color: var(--text);
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 4px 10px;
-    }
-
-    /* ===== Publications ===== */
-    ol.papers { list-style: none; padding: 0; margin: 0; }
-    li.paper {
-      display: grid;
-      grid-template-columns: 52px 1fr;
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-    li.paper .year {
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-      padding-top: 2px;
-    }
-    .paper-title { font-weight: 600; font-size: .95rem; }
-    .paper-title a { color: inherit; border-bottom-color: currentColor; }
-    .paper-title a:hover { color: var(--muted); border-bottom-color: var(--muted); }
-    .paper-authors { color: var(--text); font-size: .92rem; }
-    .paper-authors em { font-style: normal; font-weight: 600; }
-    .paper-venue { color: var(--muted); font-size: .88rem; }
-    .paper-links { margin-top: 4px; font-size: .9rem; }
-    .paper-links a { margin-right: 12px; border: none; }
-    .paper-links a:hover { text-decoration: underline; }
-
-    details.bibtex { margin-top: 6px; }
-    details.bibtex summary {
-      cursor: pointer;
-      font-size: .82rem;
-      color: var(--muted);
-      list-style: none;
-    }
-    details.bibtex summary::-webkit-details-marker { display: none; }
-    details.bibtex summary:hover { color: var(--text); }
-    details.bibtex pre {
-      background: var(--bg-soft);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 12px;
-      font-size: .78rem;
-      line-height: 1.5;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      color: var(--text);
-    }
-
-    /* ===== Education / Experience ===== */
-    .timeline { list-style: none; padding: 0; margin: 0; }
-    .timeline li {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-    .timeline .when { color: var(--muted); font-size: .92rem; }
-    .timeline .what .deg { font-weight: 600; }
-    .timeline .what .org { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-    .timeline .what .org a { color: inherit; }
-    .timeline .what .org a[href^="http"] { border-bottom-color: var(--muted); }
-    .timeline .what .org a[href^="http"]:hover { border-bottom-color: currentColor; }
-    #about a { color: inherit; }
-    #about a[href^="http"] { border-bottom-color: currentColor; }
-    #about p { text-align: justify; }
-    .uni-logo {
-      width: 20px; height: 20px;
-      object-fit: contain;
-      border-radius: 2px;
-      vertical-align: middle;
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      margin-top: 64px;
-      padding-top: 12px;
-    }
-
-	  /* ===== Responsive: Tablet ≤768px ===== */
-	    @media (max-width: 768px) {
-	      :root { --maxw: 100%; }
-	      .interests { gap: 6px; }
-	    }
-
-	    /* ===== Responsive: Phone ≤480px ===== */
-	    @media (max-width: 480px) {
-	      li.paper { grid-template-columns: 1fr; gap: 2px; }
-      li.paper .year { font-size: .85rem; }
-      .timeline li { grid-template-columns: 1fr; gap: 0; }
-      .timeline .when { font-size: .85rem; }
-      .social a { margin-right: 10px; font-size: .85rem; }
-      .interests span.ichip { font-size: .82rem; padding: 3px 8px; }
-    }
-
-    /* ===== Large Screen ≥1200px ===== */
-    @media (min-width: 1200px) {
-      :root { --maxw: min(860px, 80vw); }
-    }
-
-    /* ===== Print (CV export) ===== */
-    @media print {
-      .ctrl, .paper-links, details.bibtex { display: none; }
-      a { color: #000; }
-      body { padding-bottom: 0; }
-    }
-
-    /* ===== Password Wall ===== */
-    #pwOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg);
-      color: var(--text);
-    }
-    #pwOverlay.hidden { display: none; }
-    #pwOverlay h1 {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0 0 8px;
-    }
-    #pwOverlay p {
-      color: var(--muted);
-      margin: 0 0 24px;
-    }
-    #pwOverlay input {
-      font-family: var(--sans);
-      font-size: 1rem;
-      padding: 10px 16px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--bg-soft);
-      color: var(--text);
-      width: 220px;
-      outline: none;
-      text-align: center;
-    }
-    #pwOverlay input:focus { border-color: var(--link); }
-    #pwOverlay .pw-error {
-      color: #c00;
-      font-size: .85rem;
-      margin-top: 10px;
-      min-height: 1.2em;
-    }
-    #pwOverlay button {
-      font-family: var(--sans);
-      font-size: .9rem;
-      margin-top: 14px;
-      padding: 8px 28px;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--bg-soft);
-      color: var(--text);
-      cursor: pointer;
-    }
-    #pwOverlay button:hover { background: var(--line); }
+    :root { --text:#1a1a1a; --muted:#666; --line:#e3e3e3; --link:#0b5fa5; --link-hi:#03396c; --bg:#fff; --bg-soft:#f7f7f7; --bg-avatar:#f0f0f0; --maxw:min(800px,90vw); --serif:Georgia,"Times New Roman","Songti SC",serif; --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; }
+    :root[data-theme="dark"] { --text:#e8e8e8; --muted:#9a9a9a; --line:#2c2c2c; --link:#6cb6e8; --link-hi:#9fd0f0; --bg:#121212; --bg-soft:#1e1e1e; --bg-avatar:#2a2a2a; }
+    @media (prefers-color-scheme:dark) { :root:not([data-theme]) { --text:#e8e8e8; --muted:#9a9a9a; --line:#2c2c2c; --link:#6cb6e8; --link-hi:#9fd0f0; --bg:#121212; --bg-soft:#1e1e1e; --bg-avatar:#2a2a2a; } }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; background:var(--bg); min-height:100%; }
+    body { font-family:var(--sans); font-size:1rem; color:var(--text); background:var(--bg); line-height:1.65; margin:0; padding:0; min-height:100vh; -webkit-font-smoothing:antialiased; transition:background .2s,color .2s; }
+    .page { max-width:var(--maxw); margin:0 auto; padding:0 clamp(16px,4vw,24px) 0; }
+    a { color:var(--link); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .15s,color .15s; }
+    a[href^="http"] { border-bottom-color:var(--link); } a:hover { color:var(--link-hi); } a[href^="http"]:hover { border-bottom-color:var(--link-hi); }
+    header.hero { padding:clamp(16px,3vw,24px) 0; } .hero-top { display:flex; justify-content:space-between; align-items:flex-start; }
+    .ctrl { font-family:var(--sans); font-size:1.05rem; color:var(--muted); background:none; border:none; padding:4px 6px; cursor:pointer; line-height:1; transition:color .15s; } .ctrl:hover { color:var(--text); }
+    .avatar { width:clamp(64px,12vw,88px); height:clamp(64px,12vw,88px); border-radius:50%; background:var(--bg-avatar); color:var(--muted); font-family:var(--serif); font-size:clamp(1.4rem,3vw,2rem); display:grid; place-items:center; object-fit:cover; }
+    h1.name { font-family:var(--serif); font-weight:700; font-size:clamp(1.5rem,4vw,2.1rem); letter-spacing:.01em; margin:0 0 4px; }
+    .social { margin-top:8px; font-size:.92rem; color:var(--muted); } .social a { color:var(--text); margin-right:14px; border-bottom-color:transparent; }
+    main>section { margin-top:40px; }
+    h2.section-title { font-family:var(--sans); font-size:1rem; font-weight:700; letter-spacing:.08em; color:var(--text); margin:0 0 18px; }
+    p { margin:0 0 1rem; }
+    ol.papers { list-style:none; padding:0; margin:0; } li.paper { display:grid; grid-template-columns:52px 1fr; gap:14px; margin-bottom:22px; } li.paper .year { color:var(--muted); font-variant-numeric:tabular-nums; padding-top:2px; }
+    .paper-title { font-weight:600; font-size:.95rem; } .paper-title a { color:inherit; border-bottom-color:currentColor; } .paper-title a:hover { color:var(--muted); border-bottom-color:var(--muted); }
+    .paper-authors { color:var(--text); font-size:.92rem; } .paper-authors em { font-style:normal; font-weight:600; } .paper-venue { color:var(--muted); font-size:.88rem; }
+    .timeline { list-style:none; padding:0; margin:0; } .timeline li { display:grid; grid-template-columns:110px 1fr; gap:14px; margin-bottom:14px; } .timeline .when { color:var(--muted); font-size:.92rem; } .timeline .what .deg { font-weight:600; }
+    .timeline .what .org { color:var(--muted); display:inline-flex; align-items:center; gap:6px; } .timeline .what .org a { color:inherit; } .timeline .what .org a[href^="http"] { border-bottom-color:var(--muted); } .timeline .what .org a[href^="http"]:hover { border-bottom-color:currentColor; }
+    #about a { color:inherit; } #about a[href^="http"] { border-bottom-color:currentColor; } #about p { text-align:justify; }
+    .uni-logo { width:20px; height:20px; object-fit:contain; border-radius:2px; vertical-align:middle; }
+    footer { margin-top:64px; padding-top:12px; }
+    @media (max-width:768px) { :root { --maxw:100%; } } @media (max-width:480px) { li.paper { grid-template-columns:1fr; gap:2px; } li.paper .year { font-size:.85rem; } .timeline li { grid-template-columns:1fr; gap:0; } .timeline .when { font-size:.85rem; } .social a { margin-right:10px; font-size:.85rem; } }
+    @media (min-width:1200px) { :root { --maxw:min(860px,80vw); } } @media print { .ctrl { display:none; } a { color:#000; } }
+    #pwOverlay { position:fixed; inset:0; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--bg); color:var(--text); } #pwOverlay.hidden { display:none; }
+    #pwOverlay h1 { font-family:var(--serif); font-size:1.5rem; font-weight:700; margin:0 0 8px; } #pwOverlay p { color:var(--muted); margin:0 0 24px; }
+    #pwOverlay input { font-family:var(--sans); font-size:1rem; padding:10px 16px; border:1px solid var(--line); border-radius:4px; background:var(--bg-soft); color:var(--text); width:220px; outline:none; text-align:center; } #pwOverlay input:focus { border-color:var(--link); }
+    #pwOverlay .pw-error { color:#c00; font-size:.85rem; margin-top:10px; min-height:1.2em; } #pwOverlay button { font-family:var(--sans); font-size:.9rem; margin-top:14px; padding:8px 28px; border:1px solid var(--line); border-radius:4px; background:var(--bg-soft); color:var(--text); cursor:pointer; } #pwOverlay button:hover { background:var(--line); }
   </style>
 </head>
-
 <body>
 <div id="pwOverlay">
   <h1>Ye Zhang</h1>
@@ -338,167 +47,50 @@
   <div class="pw-error" id="pwError"></div>
   <button id="pwBtn">Enter</button>
 </div>
-<div class="page">
+<div class="page" id="decryptTarget"></div>
 
-  <!-- ========== Header ========== -->
-  <header class="hero">
-    <div class="hero-top">
-      <!-- Avatar placeholder: replace with <img class="avatar" src="photo.jpg" alt="Ye Zhang" /> -->
-      <div class="avatar">YN</div>
-      <button class="ctrl" id="themeToggle" type="button" aria-label="Toggle theme">🌙</button>
-    </div>
-
-    <h1 class="name">Ye Zhang</h1>
-
-    <nav class="social">
-      <a href="https://scholar.google.com/citations?user=vNgN_zwAAAAJ" target="_blank" rel="noopener">Google&nbsp;Scholar</a>
-      <a href="https://www.linkedin.com/in/ye-zhang-3b2176242/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#" target="_blank" rel="noopener">CV</a>
-      <a href="mailto:u7699984@alumni.anu.edu.au" target="_blank" rel="noopener">Email</a>
-    </nav>
-  </header>
-
-	  <main>
-    <!-- ========== About ========== -->
-    <section id="about">
-      <p>
-        My research lies at the intersection of <strong>machine learning</strong> and <strong>natural language processing</strong>, with a focus on efficient training, trustworthy reasoning, and interpretability.
-      </p>
-      <p>
-        I received my Master of Science (Advanced) in Materials Science from <a href="https://www.anu.edu.au" target="_blank" rel="noopener">The Australian National University</a>, advised by <a href="https://chemistry.anu.edu.au/people/prof-nicholas-f-chilton" target="_blank" rel="noopener">Prof. Nicholas Chilton</a>. Prior to that, I received my Bachelor of Science in Chemistry from ANU, advised by <a href="https://researchportalplus.anu.edu.au/en/persons/alireza-ariafard/" target="_blank" rel="noopener">Dr. Alireza Ariafard</a> and my Bachelor of Science in Applied Chemistry at <a href="https://en.sdu.edu.cn/" target="_blank" rel="noopener">Shandong University</a>, advised by <a href="https://jscen.wh.sdu.edu.cn/info/1145/1648.htm" target="_blank" rel="noopener">Prof. Ming Bai</a>.
-      </p>
-    </section>
-
-    <!-- ========== Publications ========== -->
-    <section id="publications">
-      <h2 class="section-title">Publications</h2>
-      <ol class="papers">
-        <li class="paper">
-          <span class="year">2024</span>
-          <div>
-            <div class="paper-title">
-              <a href="https://pubs.acs.org/doi/10.1021/acs.organomet.4c00378" target="_blank" rel="noopener">Computational Mechanistic Elucidation of C–N Cross-Coupling Reactions via Ligand-Enabled Au(I)/Au(III) Catalysis: Insights into Y‑Arylation of Y–H Bonds (Y = N, C, O, S) Under Base‑Free Conditions</a>
-            </div>
-            <div class="paper-authors">
-              Leyla Mohammadkhani, <em>Ye Zhang</em>, Robert Stranger, Alireza Ariafard
-            </div>
-            <div class="paper-venue">
-              <em>Organometallics</em>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ========== Education ========== -->
-    <section id="education">
-      <h2 class="section-title">Education</h2>
-      <ul class="timeline">
-        <li>
-          <span class="when">2024 — 2025</span>
-          <span class="what">
-            <span class="deg">M.Sc. (Advanced) in Materials Science</span><br />
-            <span class="org"><img class="uni-logo" src="anu-logo.png" alt="ANU" /> The Australian National University</span>
-          </span>
-        </li>
-        <li>
-          <span class="when">2020 — 2024</span>
-          <span class="what">
-            <span class="deg">B.Sc. in Chemistry (Minor in Mathematics)</span><br />
-            <span class="org"><img class="uni-logo" src="anu-logo.png" alt="ANU" /> The Australian National University</span>
-          </span>
-        </li>
-        <li>
-          <span class="when">2020 — 2024</span>
-          <span class="what">
-            <span class="deg">B.Sc. in Applied Chemistry</span><br />
-            <span class="org"><img class="uni-logo" src="sdu-logo.png" alt="SDU" /> Shandong University</span>
-          </span>
-        </li>
-      </ul>
-    </section>
-
-  </main>
-
-	  <footer>
-	    &copy; 2026 Ye Zhang. <span id="visitCount"></span>
-	  </footer>
-
-</div><!-- .page -->
-
-  <!-- ========== Logic: Page Navigation & Theme Toggle ========== -->
-  <script>
-    /* ---- Password Wall ---- */
-    (function () {
-      var overlay = document.getElementById('pwOverlay');
-      var input = document.getElementById('pwInput');
-      var btn = document.getElementById('pwBtn');
-      var err = document.getElementById('pwError');
-      var hash = '628a5758d97526c6c9c5dd9859dabe5ad0731e4d970a071b6b3423b21e241c91';
-
-      function check() {
-        var val = input.value;
-        // simple SHA-256 via SubtleCrypto
-        crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(function (buf) {
-          var h = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-	          if (h === hash) {
-	            overlay.classList.add('hidden');
-	          } else {
-            err.textContent = 'Incorrect password';
-            input.value = '';
-            input.focus();
-          }
-        });
-      }
-
-      btn.addEventListener('click', check);
-      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
-    })();
-
-    (function () {
-      var root = document.documentElement;
-
-      /* ---- Theme Toggle ---- */
-      var storedTheme = localStorage.getItem('theme');
-      if (storedTheme === 'light' || storedTheme === 'dark') {
-        root.setAttribute('data-theme', storedTheme);
-      }
-      var themeBtn = document.getElementById('themeToggle');
-      function syncThemeBtn() {
-        var dark = root.getAttribute('data-theme') === 'dark' ||
-          (!root.hasAttribute('data-theme') &&
-            window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
-        themeBtn.textContent = dark ? '☀' : '🌙';
-      }
-      themeBtn.addEventListener('click', function () {
-        var nowDark = root.getAttribute('data-theme') === 'dark' ||
-          (!root.hasAttribute('data-theme') &&
-            window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
-        var next = nowDark ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        syncThemeBtn();
-      });
-      syncThemeBtn();
-      if (window.matchMedia) {
-        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncThemeBtn);
-      }
-	    })();
-
-	    /* ---- Visit Counter ---- */
-	    (function () {
-	      var el = document.getElementById('visitCount');
-	      if (!el) return;
-	      var pageId = 'yezhang-github-page';
-	      fetch('https://visitor-badge.laobi.icu/badge?page_id=' + pageId)
-	        .then(function (r) { return r.text(); })
-	        .then(function (svg) {
-	          var m = svg.match(/>(\d+)<\/text><a/);
-	          var count = m ? m[1] : '?';
-	          el.textContent = 'Visits: ' + count;
-	        })
-	        .catch(function () { el.textContent = ''; });
-	    })();
-	  </script>
+<script>
+var PW_DATA = 'oqEZdMSq6IHUextX4ebYCaQ+lWKpH2teO1CjUZelTfgr+G0siaXSF7zDwF55KjrR8sK6W+PBL5I9lgU8UTeJl5gwYAVIsMRyowM7Vz1hkaE0Njhy6+KuWUSJRzL9UTyi+7qpjIHt3SaKRBr6eohEYA34pUgwJRqlceUoI0IaAHtoXGdWP2EAv5uuEVk8qstoJ8TaxbZJCoGDxePJUpDJBwt9K4I9SbLSaXcLGKTs3es+SjYHhDQcuaSruG5K7aI2b1cuZDYvv8tPIik0R00Bhxgsyt10NvRY/N5V2MSdDkFPMLCCEd/HbAv3pEfZpntXLkKcim2y/NTjSs7TbaOhBzTnO6rp9Ht6adzLrbO1ip5gjhhn1W+xS5d2yh6AZHJyfAeCSBanYEdLwm2gaMPEXaLNcpMOuo0Todhatjc53WgiM97ji3iAesmvFFCGLFoXW9wmyBpjF3ZLxDGY8zM6yglqxUaWptxDtxxL04AuOyT4yJXoZlov/P69v0HTuabx/A1/33++buucS7CowKMR945elv2mhHUfRYl9roP25rW+ai9uQlcmRmUY+voQZV2MMt3rF25PyQ4e8g03c2ip3IOuukNLbr+081koI+Y1QC742UWwIWhW/T1Nlg5F6G9XswdG3v6TxX/Aaa3sHGgFAL3yLYARhq5HPGxHwJQjgGZgrMIH8e6DJWyH3X6J1ayXB7TzOx4nu6pDK/XFZfYfCCIbjTrnnOIVvqI2hQt8KUveiXLMwiEmHkcUTxLbLnw/f6wq0xOIYYYplxGkXjjZM7m1fKO/hWQ6l4rQ//k0Hcmhv11xBRBCxUR8s2FKpCmaLCroJl4BLXJrPdfLaFMB9n2svERnaX59EJiuO5+++2BV7BBF6YfDDa8tMdEWVwFe107SyU7Bkb8EloXTKGGrasjfASXJjriN6mpku4cL8lp1QLjdIN9dxoI7SoztuvVkhKWHlqy48n44dI6u0R0mXZBkk4jB3IUdTHTokKg7Vf53BZlAMDG6iMUn0FJv3+i7De4GaPaMTcb1Yd9XVKjUnRcInrH4AXQY2NVFtxK8M/WM6MsanoIzSjwryDAbXYqS7/uOZwuc9QKwf56FAv7//FVkce987xQghKUW2tk9MTk383BDTYQRCG75PG1yKYFWwkWJ6uXYIYql8V7fAbxGo4Spx9qOuGsWUpcqSVvptKgNAyDu9AwpfA15RxnKCbBTVNMKYdWF7OdxU5U0tTut6BpHdt0FQZyA/nFJI22iwO5Rl8uSrAF9bd+DW8W0ciIzajKBkOteHRIHh63j89q8UhqSNHVDn/u77/N/gk3i/F5JGR0TkSByRMqqjGqmTTFZRtwf4dRPhz0ZS5zQnvwgNhXEMakdGY/XNQaixlkM50sQkxMzJPLep+y1EkMVeNDuViDhxk0w3/Nxhc/fhqeI1rBPPz+sDgZUZjeluC5pmbJgvQEoj2sUtrAu7MkAnVG4CDLOsod1vvJh1VgLcA+EcUEv/fzLkah8+c+FDUydDrFIsitTeFo65IK3IiyAqmpj5m/V0W95xUrTux77m7EnL9a0bWDi7yPueOs7aTexF+UvJ1IKlpPOLCwzYlX0IhS/MQ+rrJLVRaAfyPpZr3tBJvW+rHz3nH94Bmfh82ADjYg719+OS/x2kwkVv5k1nU7wCIun5LOi+wIWnHpZ/LDt03HaZlcrNfM1Pn/nAQAUDS0D3RzY+ruTYEWtwcfuf4kIpTvxR2gRO5HB0Mf0nRfdNoCZLLCjtIdo8zSyKyAH4XCrXgQXm9LVZmMiB1VvxypnuK+iOiGxktW7NHNdZy2kt7UXrU5S+HrcD+OC8Z7oc8gZhK70FiKju91f8HBfJ/EttxvzzVEOkrng/KUS/iqFgiM3gnqx9CwRHyK6gfFGqdQvV8VjPtFdUc9dQIOh9gMXtBFz7jFtYuqvy8xwG+e9b5bCXBfZ2t4NUzAMAKW9lucvDljWJyjGCE1xNlBOGuYN0DVBTuAgXLIIjX6mk6k6lXPOmlwsJZLpeY+Y3qpaooYveAJ5qywXh7o0HvvTcwUG7+bNM12jaZZG6/i+YAWVI1FBMTGxzpNPzJluO73pA1GK7PXDr1wSlgSCs+JC1kfQNbIDRW1TSe3Ck7cubxLC2mdHCK/3SWxRx4wRcEHNbN7VB79dZHuALtANiEvM5RFBj2wGOvRof1HV8+BT4rSkixs4D6lKB9SyMTFvadOsyHwc1xKr6YnTzdmavEQN3pgai7HgOoc4XyoZkJq+DlJo1W8jPbzPGuMnuWU5i3ZCPcv7bE4TswNQ+emQlNDC5/cpPKkmOG0lai7kt4Br2ThvxfRiLe0hVYjNVJG8fMlkJ9FqAMgI+M2Q/xQdB6oJYTd9o5TXiUMTGoc8VmoajPp9n699/sYm71zukKvMHxnzD0/mDUeZM3f66dnAOFh7kueJUTrbAs1Ugk6csl393EY4Jrrwl4OHQCv+cfyCXHTpOlAuYHMH1Yj71vdn23/xNylO/omEnhHPXQnBC13boO/x1x5mUryhzhjTOkq3keVgBTXUt6yeFAr7knZnJjT+SQ6QwqWpiW4ZVUU7KuaT+67D3G2lUorXIgP1pBUwRdafGx1+C+rWE/dvamGh8332VmIwG0+mhe9V6VmMNXKtP0CgpbRhIpcmLbULmgn6VlFmBCk7ofDQ4q1G+En4viLsAZN+4EflCp1cUM67lW+FAWKw7ijrCWd/AqFFcekpVyVIa8zFmLbPD5apvdO0zFhiGQO3at7NNVBLCmj1gzUT51PM6qGQYtS4/mv3Z6I/om6OIjYA4rPIWBBjX/fAlm/vuGY/9fXUEk4WF5OG6CISpx09jRNx5vriPGX7A45BsjJ5Jn+fFl0Hm7rTLCzb2pYZyH8EPOUOvgbcWOdSoRbBglj8C2R0s+8y1Vi4mZTAm66A4eUPEC5zyD/dGPmKNWL1cd6/zlgJ1SziXfHtQ9YatX+OFwURX6ylwy7E8AJUW7gQlZuwF2f42r8Wh1deJZUc0ooWuhphHgcO3vlE0QEbkU/4lQmTDn1uBk6hazMjWVnZik4jTSDqZccXBFO7F5csk57Q+fBs05lRzsdnmK0nMxDx05qnXsbIV748flDU1Zc6NpjqfCgvfh6ZleQl0VUTop3IjUapCy7J7HbjN3JoUx7fanvogibAD/VgqpP21f5zytPmH/D/bGxZDEvWtdUDpMSwWopln9/61NLJ6pjgfboiv9x10l8I2c7lS+yDcRM4IKIPOZCkAhg5xoCApH32e8JoBdGgIqEyl6UF1VMqmh925f1zxaT/uyQZrOJg7WDMD0aQXfAzSwn1j4guAuNgy09/yLuywIpBED9xPC+eDxfSDeqztUa9K07B6v4f4IeasCVGD6msqQ/VgiQS72g1qTjX70teAKREnbK6g8oUHoyBbD9OQcE5sJkhHK+LBLlY7v4Z1DYHinlCrZDXgz8WuKT3p/iycPUdWT1Ms7ilpA4aaAlnF32uWWdCM169UnE1vrb51g/6esi6kKPDM42dqPkiHkHF6Js2qOBcZ8SH83TUu/x9/rSkBxicmbRRz972Ds0FtU2GohvH/43D9w3ZNthTwIs3NQPcvE8cHHNoTMixDroo6YMOAHIxnagYDc9b4YRra5djOwKGta8915vLn+9BoDOcUFzQABoLNtotTB39SfTtOwk4xIV4PZwH4/hoTZPhG53XFY8ABXZyYs5U7qdb4NmSTLDQHvIeIPaLu6wLOLVblVcUt62YgQVppX3pIlEImmALWFTELRFyRd1vErDoQkxuSyZrWPLQ6v/Hktma77tZpq3MC6xRB8yv1ZlJqLFC1dQVd7kO5NKqbFQgLp8anzEbpRH6BxowmEX6Xyt3DkDJKcTYiGTUKf+BvuQv34UZV2JSrDbbAVMuc+21uM7TeZRNzE0PnMCsr9UREAOICfRou9MZd8jvqF92X/OGCj9TRtEUAvUIi+FufUPHEYOkq/DXpDUyx5BtYmp3WgqOa83CKyB+gjNHmnKI2xG99WKutA2uY/LyW+7GLPlzJtdKwmcAN/Ee1uvTs1XA77LpMvHRmbrwuMjCgjINwzFoYdDJ9oZmKjPn4KhUOe8KoecXs8RwFqD8DKbUAQ9jSEILZCnM0/16YnhgLZw2BjBraGo2iWUp410XuOhKhdfc1eunil8xH8uVcQWNS5YwUDV2Z2cltSY2kkO4tPtfd4HrwLMu5Gbt7PmXN8H35rDrytq8Vfw8NNibnyuB4JBflCmYUIpVdwtshodfEA5bT48M9wsyQymW/F84G6h8Bbd17CpGXIbPWp05i86RRG1yrOdba5fl0qLpwMcrYSIliwW9CIOHe117gDo1Ls0vTxYKr+kjlq5MfLO+3Y06ql9epDAj3OgLM4NTu3KjPz4uXOa2Euo14rhGGbYKhbZhD58utY3/mY1f2A4ZZjx3jGR4gGsSbnlzNiouTprlZgFpLzzXRqs6o8GAJqEaRLN4n6ikdwmEKHRHc6+0O1mapz7w/kjBOCnev3RRMTESJy2QUCIWEHLmjaoK9z341kpFfs8l3dp6TgznEdaJHjSx/WvpHdUKPuCl9BDbIJiT6tZpiOwGbYWc5KqoCbHlWAGqp86NMoD27t+vgHzEL5OaQOK2ehMe9IyunNXAjsn2z3DM9pT2xX1hIBHtCU5WdgdgG2/IIm6h94qk5Ji0cikXh7mMMBoXdwVY94SB3nDJC9LBkdzMVFCdp1WnlMCJ0VCVN9pPf2LA9hIiIO9st3ZnUYiHwOHSosU7DEmD0ZqbJBZLYvWeze+0QELJMw==';
+(function(){
+  var o=document.getElementById('pwOverlay'), i=document.getElementById('pwInput'), b=document.getElementById('pwBtn'), e=document.getElementById('pwError');
+  function d(p){
+    try{
+      var r=Uint8Array.from(atob(PW_DATA),function(c){return c.charCodeAt(0)});
+      var sa=r.slice(0,16), iv=r.slice(16,28), ta=r.slice(28,44), ct=r.slice(44);
+      crypto.subtle.importKey('raw',new TextEncoder().encode(p),'PBKDF2',false,['deriveBits','deriveKey']).then(function(bk){
+        crypto.subtle.deriveKey({name:'PBKDF2',salt:sa,iterations:200000,hash:'SHA-256'},bk,{name:'AES-GCM',length:256},false,['decrypt']).then(function(ak){
+          crypto.subtle.decrypt({name:'AES-GCM',iv:iv,tagLength:128},ak,new Uint8Array([...ct,...ta])).then(function(dc){
+            document.getElementById('decryptTarget').innerHTML=new TextDecoder().decode(dc);
+            o.classList.add('hidden');
+            if(window.initTheme) window.initTheme();
+            if(window.initVisitCounter) window.initVisitCounter();
+          }).catch(function(){w()});
+        }).catch(function(){w()});
+      }).catch(function(){w()});
+    }catch(ex){w()}
+  }
+  function w(){ e.textContent='Incorrect password'; i.value=''; i.focus(); }
+  b.addEventListener('click',function(){d(i.value)});
+  i.addEventListener('keydown',function(ev){if(ev.key==='Enter') d(i.value)});
+})();
+window.initTheme=function(){
+  var r=document.documentElement, t=localStorage.getItem('theme');
+  if(t==='light'||t==='dark') r.setAttribute('data-theme',t);
+  var b=document.getElementById('themeToggle'); if(!b) return;
+  function s(){
+    var d=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches);
+    b.textContent=d?'☀':'🌙';
+  }
+  b.addEventListener('click',function(){
+    var n=r.getAttribute('data-theme')==='dark'||(!r.hasAttribute('data-theme')&&window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches);
+    r.setAttribute('data-theme',n?'light':'dark'); localStorage.setItem('theme',n?'light':'dark'); s();
+  });
+  s(); if(window.matchMedia) matchMedia('(prefers-color-scheme:dark)').addEventListener('change',s);
+};
+window.initVisitCounter=function(){
+  var e=document.getElementById('visitCount'); if(!e) return;
+  fetch('https://visitor-badge.laobi.icu/badge?page_id=yezhang-github-page').then(function(r){return r.text()}).then(function(s){var m=s.match(/>(\d+)<\/text><a/);e.textContent=m?'Visits: '+m[1]:''}).catch(function(){e.textContent=''});
+};
+</script>
 </body>
 </html>
