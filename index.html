@@ -441,10 +441,9 @@
         // simple SHA-256 via SubtleCrypto
         crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(function (buf) {
           var h = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-          if (h === hash) {
-            overlay.classList.add('hidden');
-            sessionStorage.setItem('pw_ok', '1');
-          } else {
+	          if (h === hash) {
+	            overlay.classList.add('hidden');
+	          } else {
             err.textContent = 'Incorrect password';
             input.value = '';
             input.focus();
@@ -452,12 +451,8 @@
         });
       }
 
-      if (sessionStorage.getItem('pw_ok') === '1') {
-        overlay.classList.add('hidden');
-      } else {
-        btn.addEventListener('click', check);
-        input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
-      }
+      btn.addEventListener('click', check);
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
     })();
 
     (function () {
